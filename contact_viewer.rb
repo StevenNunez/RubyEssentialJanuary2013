@@ -20,13 +20,13 @@ class ContactViewer
 
   def add_contact
     @output.puts "Please enter a name:"
-    name = @input.gets
+    name = @input.gets.chomp
 
     @output.puts "Please enter an email:"
-    email = @input.gets
+    email = @input.gets.chomp
 
     @output.puts "Please enter an phone:"
-    phone = @input.gets
+    phone = @input.gets.chomp
 
     contact = Contact.new name, email, phone
     @collection.add contact
@@ -57,7 +57,7 @@ describe ContactViewer do
   it "adds a contact from user input" do
     fc = FakeConsole.new
     fk = FakeKeyboard.new
-    fk.responses = ["Steven", "guy@place.com", "555-555-6666"]
+    fk.responses = ["Steven\n", "guy@place.com\n", "555-555-6666\n"]
     cc = ContactCollection.new
     cv = ContactViewer.new(fc, fk, cc)
     cv.add_contact
