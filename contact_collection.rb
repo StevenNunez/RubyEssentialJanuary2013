@@ -18,6 +18,10 @@ class ContactCollection
   def find_by_name(name)
     @contacts.find{|contact| contact.name == name}
   end
+
+  def all
+    @contacts
+  end
 end
 
 describe ContactCollection do
@@ -45,5 +49,15 @@ describe ContactCollection do
     collection = ContactCollection.new
     found = collection.find_by_name "Guy"
     found.must_be_nil
+  end
+
+  it "returns all contacts" do 
+    guy = Contact.new "Guy", "a@b.com", "222-222-2222"
+    gal = Contact.new "Gal", "b@c.com", "555-555-5555"
+    collection = ContactCollection.new
+    collection.add guy
+    collection.add gal
+
+    collection.all.must_equal [guy, gal]
   end
 end
