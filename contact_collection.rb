@@ -22,6 +22,11 @@ class ContactCollection
   def all
     @contacts
   end
+
+  def to_s
+    @contacts.join
+  end
+
 end
 
 describe ContactCollection do
