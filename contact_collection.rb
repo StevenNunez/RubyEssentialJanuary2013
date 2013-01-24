@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require_relative 'contact'
+
 class ContactCollection
 
   def initialize
