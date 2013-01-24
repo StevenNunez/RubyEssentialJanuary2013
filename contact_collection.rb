@@ -9,9 +9,13 @@ class ContactCollection
   def add(contact)
     @contacts << contact
   end
-  
+
   def count
     @contacts.count
+  end
+
+  def find_by_name(name)
+    @contacts.find{|contact| contact.name == name}
   end
 end
 
@@ -23,14 +27,22 @@ describe ContactCollection do
     collection.add contact
     collection.count.must_equal 1
   end
+
   it "finds a contact by name" do
-    contact = Contact.new "Guy", "a@b.com", "222-222-2222"
-    contact = Contact.new "Gal", "b@c.com", "555-555-5555"
+    guy = Contact.new "Guy", "a@b.com", "222-222-2222"
+    gal = Contact.new "Gal", "b@c.com", "555-555-5555"
     collection = ContactCollection.new
-    collection.add contact
+    collection.add guy
+    collection.add gal
 
     found = collection.find_by_name "Guy"
     found.name.must_equal "Guy"
     found.email.must_equal "a@b.com"
+  end
+
+  it "returns nil if it can't find anyone" do
+    collection = ContactCollection.new
+    found = collection.find_by_name "Guy"
+    found.must_be_nil
   end
 end
