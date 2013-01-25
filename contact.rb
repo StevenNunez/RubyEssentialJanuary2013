@@ -7,6 +7,10 @@ class Contact
     @email = email
     @phone = phone
   end
+
+  def to_s
+    "#{@name} #{@phone} #{@email}"
+  end
 end
 
 describe Contact do

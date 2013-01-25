@@ -1,0 +1,11 @@
+require 'open-uri'
+
+SHOUTKEY = "http://shoutkey.com/new?url="
+MATCH_QUERY = /<h1><a href=\"http:\/\/shoutkey.com\/(\w*)/
+
+ARGV.each do |arg|
+  site = URI.encode_www_form_component arg
+  page = open("#{SHOUTKEY}#{site}").read
+  match = page.match MATCH_QUERY
+  puts "Shoutkey for #{arg}\n#{match.captures}"
+end
